@@ -1,0 +1,15 @@
+name: CI-CD-FastAPI_digitalOcean
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  my_ci_part:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Git clone our repo
+        uses: actions/checkout@v1
+      
