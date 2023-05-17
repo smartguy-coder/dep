@@ -1,7 +1,7 @@
 STATUS OF LAST DEPLOYMENT:<br>
 
 [![example workflow](https://github.com/smartguy-coder/dep/actions/workflows/main.yml/badge.svg)](
-https://github.com/smartguy-coder/dep/actions/workflows/main.yml/badge.svg)<br>
+https://github.com/smartguy-coder/dep/actions/workflows/main.yml)<br>
 
 
 ![example branch parameter](https://github.com/smartguy-coder/dep/actions/workflows/main.yml/badge.svg?branch=master)<br>
