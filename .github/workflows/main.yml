@@ -1,3 +1,4 @@
+# https://docs.github.com/ru/actions/learn-github-actions/essential-features-of-github-actions
 name: CI-CD-FastAPI_digitalOcean
 
 on: 
@@ -9,25 +10,41 @@ on:
       - master
 
 jobs:
+  welcome_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome part
+      - run: |
+          echo "Hello from workflow that was triggered by ${{ github.event_name }}"
+      - run: "whoami"
+      - run: sleep 15   # to show dependencies
   build:
+    needs: [welcome_script]
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.10.11, 3.11.3]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
+          # versions like 3.10 write like "3.10"
           python-version: ${{ matrix.python-version }}
       - name: Install deps
         run: |
           echo 'START INSTALLING'
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run flake8
-        run: flake8 --ignore=E501 main.py
-
+          pip install flake8 pytest isort
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Lint with flake8
+        run: |
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          isort --check .
+      - name: Test with pytest
+        run: |
+          pytest
 
   my_ci_part:
     runs-on: ubuntu-latest
@@ -35,5 +52,5 @@ jobs:
     
     steps:
       - name: Git clone our repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
