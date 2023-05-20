@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Welcome part
-      - run: |
+        run: |
           echo "Hello from workflow that was triggered by ${{ github.event_name }}"
-      - run: "whoami"
-      - run: sleep 15   # to show dependencies
+          whoami
+          sleep 15   # to show dependencies
   build:
     needs: [welcome_script]
     runs-on: ubuntu-latest
