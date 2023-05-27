@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>FEATURES</h1>
+{% for feature in features %}
+    <p>>>> {{ feature }}</p>
+{% endfor %}
+<br><br>
+<p>BOOKS LIST:</p>
+{% for book in books %}
+    <p>
+        Name: {{ book.name }}<br>
+        Price: {{ book.price }}<br>
+        <img width="150" src="{{ url_for('static', path='book1.jpg')}}"  class="rounded mx-auto d-block" alt="..."><br>
+        ----------------------------------------------------------------
+    </p>
+{% endfor %}
+
+{% endblock %}

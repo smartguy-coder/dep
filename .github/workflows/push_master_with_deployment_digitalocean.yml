@@ -1,11 +1,8 @@
 # https://docs.github.com/ru/actions/learn-github-actions/essential-features-of-github-actions
-name: CI-CD-FastAPI_digitalOcean
+name: CI-CD-FastAPI_digitalOcean_deploy
 
 on: 
   push:
-    branches:
-      - master
-  pull_request:
     branches:
       - master
 
