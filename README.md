@@ -14,3 +14,7 @@ isort .\main.py
 isort --check-only .\main.py
 
 
+deployment
+https://github.com/marketplace/actions/github-action-for-digitalocean-doctl
+
+
