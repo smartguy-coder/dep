@@ -1,13 +1,13 @@
 import datetime
-from random import randrange
 import shutil
+from random import randrange
+
 import uvicorn
-
-from schema import Book
-
-from fastapi import FastAPI, Query, Path, UploadFile, File
+from fastapi import FastAPI, File, Path, Query, UploadFile
 from fastapi.staticfiles import StaticFiles
+
 from pages.router import router as router_pages
+from schema import Book
 
 app = FastAPI(
     title='Books app'
