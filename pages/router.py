@@ -13,9 +13,9 @@ templates = Jinja2Templates(directory='templates')
 def get_base_page(request: Request):
     return templates.TemplateResponse('base.html', {'request': request})
 
+
 @router.get('/books')
 def get_all_books(request: Request):
-
     features = ['first', 'second']
 
     books = [
