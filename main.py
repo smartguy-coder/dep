@@ -1,23 +1,17 @@
 import datetime
-from random import random, randrange
-from typing import List
 import shutil
+from random import randrange
+
 import uvicorn
-
-
-
-from schema import Book
-
-
-from fastapi import FastAPI, Query, Path, UploadFile, File
+from fastapi import FastAPI, File, Path, Query, UploadFile
 from fastapi.staticfiles import StaticFiles
-from pages.router import router as router_pages
 
+from pages.router import router as router_pages
+from schema import Book
 
 app = FastAPI(
     title='Books app'
 )
-
 
 app.mount('/static', StaticFiles(directory='static'), name='static')
 
@@ -28,13 +22,18 @@ app.include_router(router_pages)
 def startup():
     print('kkkkkkkkkkk')
 
+
 @app.on_event('shutdown')
 def shutdown():
     print('finish')
 
+
 @app.get('/')
 async def root():
-    return {'message': 'hello'}
+    pref = 'me'
+    res = pref + 'ssage'
+
+    return {res: 'hello'}
 
 
 @app.get('/{number}')
@@ -46,6 +45,7 @@ async def simple_validator(number: int, q: int = None):
         'message': f'the number {number} was multiplied by {multiply_coefficient}',
         'result': result,
     }
+
 
 @app.get('/user/{user_id}/data/{operation}')
 async def work_with_address(user_id: int, operation: str = 'balance'):
@@ -86,6 +86,7 @@ def file_upload(file: UploadFile = File(...)):
         shutil.copyfileobj(file.file, buffer)
     return {'filename': file.filename}
 
+
 @app.post('/files')
 def files_upload(files: list[UploadFile] = File(...)):
     """file uploading"""
@@ -93,6 +94,7 @@ def files_upload(files: list[UploadFile] = File(...)):
         with open(f'{file.filename}', 'wb') as buffer:
             shutil.copyfileobj(file.file, buffer)
     return {'filename': 'all'}
+
 
 @app.get('/book/{pk}')
 async def get_single_book(

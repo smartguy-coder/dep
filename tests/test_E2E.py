@@ -1,7 +1,8 @@
 import http
-import pytest
 
+import pytest
 from fastapi.testclient import TestClient
+
 from main import app
 
 
@@ -21,4 +22,3 @@ def test_home(client: TestClient) -> None:
 def test_web(client: TestClient) -> None:
     response = client.get('/pages/books')
     assert response.status_code == http.HTTPStatus.OK
-    # assert response.json() == {'message': 'hello'}
