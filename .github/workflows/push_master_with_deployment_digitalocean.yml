@@ -58,4 +58,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            mkdir fffffffkk
+            cd ~
+            ls -la
