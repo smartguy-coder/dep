@@ -32,9 +32,13 @@ def startup():
 def shutdown():
     print('finish')
 
+
 @app.get('/')
 async def root():
-    return {'message': 'hello'}
+    pref = 'me'
+    res = pref + 'ssage'
+
+    return {res: 'hello'}
 
 
 @app.get('/{number}')

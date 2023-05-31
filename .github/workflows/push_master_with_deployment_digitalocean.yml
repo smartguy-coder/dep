@@ -1,4 +1,5 @@
 # https://docs.github.com/ru/actions/learn-github-actions/essential-features-of-github-actions
+# https://github.com/marketplace/actions/ssh-remote-commands
 name: CI-CD-FastAPI_digitalOcean_deploy
 
 on: 
@@ -14,8 +15,8 @@ jobs:
         run: |
           echo "Hello from workflow that was triggered by ${{ github.event_name }}"
           whoami
-          sleep 15   # to show dependencies
-  build:
+          sleep 5   # to show dependencies
+  testing:
     needs: [welcome_script]
     runs-on: ubuntu-latest
     strategy:
@@ -43,11 +44,19 @@ jobs:
         run: |
           pytest
 
-  my_ci_part:
+  build:
     runs-on: ubuntu-latest
-    needs: [build]
-    
+    needs: [testing]
+    name: Build
+
     steps:
-      - name: Git clone our repo
-        uses: actions/checkout@v3
-      
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo 'some info'
+            mkdir fffffff
