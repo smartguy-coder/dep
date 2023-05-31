@@ -1,5 +1,3 @@
-from typing import List
-
 from pydantic import BaseModel, Field, validator
 from datetime import date
 
@@ -16,10 +14,3 @@ class Book(BaseModel):
     summary: str
     genres: list[Genre] = None
     pages: int
-
-    # @validator('duration_sec')
-    # def check_duration(cls, value):
-    #     if value < 0:
-    #         raise ValueError('negative duration is impossible')
-    #     return value
-
