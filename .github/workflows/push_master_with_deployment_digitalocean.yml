@@ -58,4 +58,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            mkdir fffffff
+            mkdir fffffffkk
